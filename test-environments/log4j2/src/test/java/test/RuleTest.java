@@ -1,13 +1,15 @@
-package dk.bitcraft.lc;
+package test;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Rule;
 import org.junit.Test;
 
+import dk.bitcraft.lc.LogCollector;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class Log4j2Test {
+public class RuleTest {
     @Rule
     public LogCollector collector = new LogCollector(LogManager.getLogger("test.logger"));
 
@@ -20,6 +22,9 @@ public class Log4j2Test {
             logger.error("This is another error!");
         }
 
-        assertThat(collector.getLogs()).hasSize(2).contains("This is an error!", "This is another error!");
+        assertThat(collector.getLogs())
+                .hasSize(2)
+                .contains("This is an error!", "This is another error!");
     }
+
 }
