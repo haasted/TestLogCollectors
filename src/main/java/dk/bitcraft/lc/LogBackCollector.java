@@ -8,17 +8,18 @@ import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.read.ListAppender;
 
-class LogBackCollector {
+class LogBackCollector implements CollectorImpl {
     private final Logger logger;
 
     private final static String appenderName = UUID.randomUUID().toString();
 
     private final ListAppender<ILoggingEvent> appender = new ListAppender<>();
 
-    public LogBackCollector(Logger logger) {
-        this.logger = logger;
+    public LogBackCollector(Object logger) {
+        this.logger = (Logger) logger;
     }
 
+    @Override
     public void setup() {
         appender.setName(appenderName);
         appender.start();
@@ -26,6 +27,7 @@ class LogBackCollector {
         logger.addAppender(appender);
     }
 
+    @Override
     public void remove() {
         logger.detachAppender(appenderName);
 
@@ -33,7 +35,8 @@ class LogBackCollector {
         appender.stop();
     }
 
-    List<String> getResult() {
+    @Override
+    public List<String> getResult() {
         return appender.list.stream().map(e -> e.getFormattedMessage()).collect(Collectors.toList());
     }
 }

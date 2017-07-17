@@ -9,11 +9,16 @@
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: 'maven-publish'
 
-// In this section you declare where to find the dependencies of your project
+
+jar {
+    baseName = 'LogCollector'
+    version = '0.1.0'
+}
+
+
 repositories {
-    // Use 'jcenter' for resolving your dependencies.
-    // You can declare any Maven/Ivy/file repository here.
     jcenter()
     mavenLocal()
 }
@@ -25,10 +30,27 @@ dependencies {
     compileOnly 'org.slf4j:slf4j-api:1.7.24'
     compileOnly 'ch.qos.logback:logback-core:1.2.3'
     compileOnly 'ch.qos.logback:logback-classic:1.2.3'
+    compileOnly 'org.apache.logging.log4j:log4j-api:2.8.2'
+    compileOnly 'org.apache.logging.log4j:log4j-core:2.8.2'
 
     testCompile 'org.assertj:assertj-core:3.8.0'
     testCompile 'org.slf4j:slf4j-api:1.7.24'
     testCompile 'ch.qos.logback:logback-core:1.2.3'
     testCompile 'ch.qos.logback:logback-classic:1.2.3'
+    testCompile 'org.apache.logging.log4j:log4j-api:2.8.2'
+    testCompile 'org.apache.logging.log4j:log4j-core:2.8.2'
 
+}
+
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId 'dk.bitcraft'
+            artifactId 'LogCollector'
+            version '0.1.0-SNAPSHOT'
+
+            from components.java
+        }
+    }
 }
