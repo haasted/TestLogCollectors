@@ -24,7 +24,6 @@ public class LogCollector extends ExternalResource {
     }
 
     public LogCollector(Object logger) {
-        // TODO Turn this into a String comparison for the cases where logback is not on the classpath
         if (Logback.filter(c -> c.isInstance(logger)).isPresent()) {
             collector = new LogBackCollector(logger);
             return;
