@@ -35,11 +35,13 @@ class Log4j2Collector implements CollectorImpl {
 
     @Override
     public List<String> getResult() {
-        return appender.events.stream().map(e -> e.toString()).collect(toList());
+        // TODO Check whether a more appropriate layout can be found, e.g. without \n at the end.
+        return appender.events.stream().map(String::trim).collect(toList());
     }
 
     class ListAppender extends AbstractAppender {
-        List<LogEvent> events = new ArrayList<>();
+        List<String> events = new ArrayList<>();
+
 
         ListAppender(String name) {
             super(name, null, PatternLayout.createDefaultLayout());
@@ -47,7 +49,7 @@ class Log4j2Collector implements CollectorImpl {
 
         @Override
         public void append(LogEvent event) {
-            events.add(event);
+            events.add(new String(getLayout().toByteArray(event)));
         }
     }
 }
