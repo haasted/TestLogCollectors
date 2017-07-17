@@ -34,6 +34,6 @@ class LogBackCollector {
     }
 
     List<String> getResult() {
-        return appender.list.stream().map(e -> e.getFormattedMessage()).collect(Collectors.toList());   
+        return appender.list.stream().map(e -> e.getFormattedMessage()).collect(Collectors.toList());
     }
 }
