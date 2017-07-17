@@ -20,11 +20,15 @@ repositories {
 
 // In this section you declare the dependencies for your production and test code
 dependencies {
-    // The production code uses the SLF4J logging API at compile time
-    compile 'org.slf4j:slf4j-api:1.7.24'
-    compile 'ch.qos.logback:logback-core:1.2.3'
-    compile 'ch.qos.logback:logback-classic:1.2.3'
-
     compile 'junit:junit:4.12'
+
+    compileOnly 'org.slf4j:slf4j-api:1.7.24'
+    compileOnly 'ch.qos.logback:logback-core:1.2.3'
+    compileOnly 'ch.qos.logback:logback-classic:1.2.3'
+
     testCompile 'org.assertj:assertj-core:3.8.0'
+    testCompile 'org.slf4j:slf4j-api:1.7.24'
+    testCompile 'ch.qos.logback:logback-core:1.2.3'
+    testCompile 'ch.qos.logback:logback-classic:1.2.3'
+
 }
