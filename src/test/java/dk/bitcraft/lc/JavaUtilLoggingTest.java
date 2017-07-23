@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class JavaUtilLoggingTest {
     @Rule
     public LogCollector collector = new LogCollector(Logger.getLogger("test.logger"));
-    
+
     @Test
     public void test() {
         {
