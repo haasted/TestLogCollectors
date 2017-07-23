@@ -13,6 +13,8 @@ public class LogCollector extends ExternalResource {
 
     private static final Optional<Class> Logback = lookFor("ch.qos.logback.classic.Logger");
 
+    private static final Optional<Class> javaUtilLogging = lookFor("java.util.logging.Logger");
+
 
 
     private static Optional<Class> lookFor(String s) {
@@ -31,6 +33,11 @@ public class LogCollector extends ExternalResource {
 
         if (log4j2.filter(c -> c.isInstance(logger)).isPresent()) {
             collector = new Log4j2Collector(logger);
+            return;
+        }
+
+        if (javaUtilLogging.filter(c -> c.isInstance(logger)).isPresent()) {
+            collector = new JavaUtilLoggingCollector(logger);
             return;
         }
 
