@@ -21,12 +21,17 @@ repositories {
 
 // In this section you declare the dependencies for your production and test code
 dependencies {
-    test 'org.apache.logging.log4j:log4j-api:2.8.2'
-    test 'org.apache.logging.log4j:log4j-core:2.8.2'
+    compile 'org.apache.logging.log4j:log4j-api:2.8.2'
+    compile 'org.apache.logging.log4j:log4j-core:2.8.2'
+    compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.8.2'
+
+    compile 'org.slf4j:slf4j-api:1.7.24'
 
     testCompile 'junit:junit:4.12'
 
     testCompile 'org.assertj:assertj-core:3.8.0'
 
-    testCompile 'dk.bitcraft:LogCollector:0.1.0-SNAPSHOT'
+    testCompile 'dk.bitcraft:LogCollector:0.5.0-SNAPSHOT'
+
+
 }
