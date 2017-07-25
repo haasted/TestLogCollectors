@@ -5,10 +5,10 @@ import java.util.function.Function;
 
 enum Frameworks {
 
-    Logback("ch.qos.logback.classic.Logger", LogBackCollector::new),
-    Log4j2("org.apache.logging.log4j.Logger", Log4j2Collector::new),
-    JavaUtilLogging("java.util.logging.Logger", JavaUtilLoggingCollector::new),
-    Log4j2_slf4j("org.apache.logging.slf4j.Log4jLogger", SLF4J_Log4j2Collector::create);
+    Logback("ch.qos.logback.classic.Logger", v -> new LogBackCollector(v)),
+    Log4j2("org.apache.logging.log4j.Logger", v -> new Log4j2Collector(v)),
+    JavaUtilLogging("java.util.logging.Logger", v -> new JavaUtilLoggingCollector(v)),
+    Log4j2_slf4j("org.apache.logging.slf4j.Log4jLogger", v -> SLF4J_Log4j2Collector.create(v));
 
     private final Optional<Class> clazz;
     private final Function<Object, CollectorImpl> creator;
