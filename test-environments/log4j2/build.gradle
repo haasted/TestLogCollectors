@@ -31,7 +31,5 @@ dependencies {
 
     testCompile 'org.assertj:assertj-core:3.8.0'
 
-    testCompile 'dk.bitcraft:LogCollector:0.5.0-SNAPSHOT'
-
-
+    testCompile "dk.bitcraft:LogCollector:${rootProject.artifactId}"
 }
