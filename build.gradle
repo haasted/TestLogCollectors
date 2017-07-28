@@ -19,7 +19,6 @@ jar {
 
 repositories {
     jcenter()
-    mavenLocal()
 }
 
 // In this section you declare the dependencies for your production and test code
