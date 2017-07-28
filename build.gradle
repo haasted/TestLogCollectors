@@ -67,7 +67,7 @@ publishing {
         maven(MavenPublication) {
             groupId 'dk.bitcraft'
             artifactId 'LogCollector'
-            version "0.5.0"
+            version "0.6.0-SNAPSHOT"
 
             from components.java
         }
