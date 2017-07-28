@@ -23,7 +23,8 @@ public class LogbackTest {
             logger.warn("This should be collected!");
         }
 
-        assertThat(collector.getLogs())
-                .containsExactly("This should be collected!");
+        assertThat(collector.getLogs()).hasSize(1);
+        assertThat(collector.getLogs().get(0)).contains("This should be collected!");
+
     }
 }

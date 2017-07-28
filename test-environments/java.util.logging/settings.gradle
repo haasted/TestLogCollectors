@@ -15,8 +15,4 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'LogCollectors'
-include 'test-environments:logback'
-include 'test-environments:log4j2'
-include 'test-environments:java.util.logging'
-include 'test-environments:slf4j'
+rootProject.name = 'java.util.logging'
