@@ -47,7 +47,8 @@ class Log4j2Collector implements CollectorImpl {
                 .collect(toList());
     }
 
-    public List<?> getRawRecords() {
+    @Override
+    public List<?> getRawLogs() {
         return appender.events.stream().collect(toList());
     }
 

@@ -6,4 +6,5 @@ interface CollectorImpl {
     void setup();
     void remove();
     List<String> getResult();
+    List<?> getRawLogs();
 }
