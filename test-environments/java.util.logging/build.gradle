@@ -1,0 +1,4 @@
+dependencies {
+    testCompile 'org.slf4j:slf4j-api:1.7.24'
+    testCompile 'org.slf4j:slf4j-jdk14:1.7.24'
+}
