@@ -8,6 +8,8 @@ import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.read.ListAppender;
 
+import static java.util.stream.Collectors.toList;
+
 class LogBackCollector implements CollectorImpl {
     private final Logger logger;
 
@@ -30,13 +32,16 @@ class LogBackCollector implements CollectorImpl {
     @Override
     public void remove() {
         logger.detachAppender(appenderName);
-
-
         appender.stop();
     }
 
     @Override
     public List<String> getResult() {
-        return appender.list.stream().map(e -> e.getFormattedMessage()).collect(Collectors.toList());
+        return appender.list.stream().map(e -> e.getFormattedMessage()).collect(toList());
+    }
+
+    @Override
+    public List<?> getRawLogs() {
+        return appender.list.stream().collect(toList());
     }
 }

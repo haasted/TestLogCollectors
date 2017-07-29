@@ -4,9 +4,12 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class JavaUtilLoggingTest {
     @Rule
@@ -25,5 +28,8 @@ public class JavaUtilLoggingTest {
 
         assertThat(logs.get(0)).contains("This is an warning!");
         assertThat(logs.get(1)).contains("This is another warning!");
+
+        List<LogRecord> rawLogs = (List<LogRecord>) collector.getRawLogs();
+        assertTrue(rawLogs.stream().allMatch(e -> e.getLevel() == Level.WARNING));
     }
 }

@@ -32,4 +32,8 @@ public class LogCollector extends ExternalResource {
     public List<String> getLogs() {
         return collector.getResult();
     }
+
+    public List<?> getRawLogs() {
+        return collector.getRawLogs();
+    }
 }

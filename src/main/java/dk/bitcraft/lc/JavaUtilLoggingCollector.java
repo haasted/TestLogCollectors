@@ -38,6 +38,11 @@ public class JavaUtilLoggingCollector implements CollectorImpl {
         return handler.records.stream().map(formatter::format).collect(toList());
     }
 
+    @Override
+    public List<?> getRawLogs() {
+        return handler.records.stream().collect(toList());
+    }
+
     class ListHandler extends Handler {
         List<LogRecord> records = new ArrayList<>();
 
