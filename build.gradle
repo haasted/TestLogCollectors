@@ -9,7 +9,8 @@
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
 apply plugin: 'idea'
-apply plugin: 'maven-publish'
+apply plugin: 'maven'
+apply plugin: 'signing'
 
 jar {
     baseName = 'LogCollector'
@@ -73,16 +74,59 @@ artifacts {
     archives javadocJar
 }
 
-check.dependsOn(sourcesJar, javadocJar)
+signing {
+    sign configurations.archives
+}
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId 'dk.bitcraft'
-            artifactId 'LogCollector'
-            version "0.6.0-SNAPSHOT"
+check.dependsOn(sourcesJar, javadocJar, signing)
 
-            from components.java
+
+group = "dk.bitcraft"
+archivesBaseName = "LogCollector"
+version = "0.6.0-SNAPSHOT"
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'Test Log Collectors'
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description 'A JUnit rule collects the emitted log entries of the component under test.'
+                url 'https://github.com/haasted/TestLogCollectors'
+
+                scm {
+                    connection 'scm:svn:http://foo.googlecode.com/svn/trunk/'
+                    developerConnection 'scm:svn:https://foo.googlecode.com/svn/trunk/'
+                    url 'https://github.com/haasted/TestLogCollectors'
+                }
+
+                licenses {
+                    license {
+                        name 'The MIT License'
+                        url 'https://opensource.org/licenses/MIT'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'haasted'
+                        name 'Henrik Aasted Soerensen'
+                        email 'has@bitcraft.dk'
+                    }
+                }
+            }
         }
     }
 }
