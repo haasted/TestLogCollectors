@@ -107,8 +107,6 @@ uploadArchives {
                 url 'https://github.com/haasted/TestLogCollectors'
 
                 scm {
-                    connection 'scm:svn:http://foo.googlecode.com/svn/trunk/'
-                    developerConnection 'scm:svn:https://foo.googlecode.com/svn/trunk/'
                     url 'https://github.com/haasted/TestLogCollectors'
                 }
 
