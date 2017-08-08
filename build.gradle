@@ -9,13 +9,13 @@
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
 apply plugin: 'idea'
-apply plugin: 'maven-publish'
+apply plugin: 'maven'
+apply plugin: 'signing'
 
 jar {
     baseName = 'LogCollector'
-    version = '0.5.0'
+    version = '0.6.1'
 }
-
 
 repositories {
     jcenter()
@@ -37,13 +37,10 @@ dependencies {
     testCompile 'org.assertj:assertj-core:3.8.0'
 
     testCompile 'org.slf4j:slf4j-api:1.7.24'
-    testCompile 'org.slf4j:slf4j-jdk14:1.7.24'
-    testCompile 'org.slf4j:slf4j-simple:1.7.24'
     testCompile 'ch.qos.logback:logback-core:1.2.3'
     testCompile 'ch.qos.logback:logback-classic:1.2.3'
     testCompile 'org.apache.logging.log4j:log4j-api:2.8.2'
     testCompile 'org.apache.logging.log4j:log4j-core:2.8.2'
-    testCompile 'org.apache.logging.log4j:log4j-slf4j-impl:2.8.2'
 }
 
 subprojects {
@@ -62,14 +59,74 @@ subprojects {
     }
 }
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId 'dk.bitcraft'
-            artifactId 'LogCollector'
-            version "0.5.0"
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
 
-            from components.java
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+check.dependsOn(sourcesJar, javadocJar, signing)
+
+
+group = "dk.bitcraft"
+archivesBaseName = "LogCollector"
+version = "0.6.1"
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'Test Log Collectors'
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description 'A JUnit rule collects the emitted log entries of the component under test.'
+                url 'https://github.com/haasted/TestLogCollectors'
+
+                scm {
+                    connection 'scm:svn:http://foo.googlecode.com/svn/trunk/'
+                    developerConnection 'scm:svn:https://foo.googlecode.com/svn/trunk/'
+                    url 'https://github.com/haasted/TestLogCollectors'
+                }
+
+                licenses {
+                    license {
+                        name 'The MIT License'
+                        url 'https://opensource.org/licenses/MIT'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'haasted'
+                        name 'Henrik Aasted Soerensen'
+                        email 'has@bitcraft.dk'
+                    }
+                }
+            }
         }
     }
 }

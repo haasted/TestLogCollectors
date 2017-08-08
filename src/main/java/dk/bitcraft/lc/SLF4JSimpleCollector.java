@@ -37,6 +37,11 @@ public class SLF4JSimpleCollector implements CollectorImpl {
         return result;
     }
 
+    @Override
+    public List<?> getRawLogs() {
+        return getResult();
+    }
+
     class CapturingPrintStream extends PrintStream {
         Deque<String> logs = new LinkedList<>();
 

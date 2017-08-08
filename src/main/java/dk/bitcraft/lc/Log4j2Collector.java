@@ -1,10 +1,12 @@
 package dk.bitcraft.lc;
 
+import org.apache.logging.log4j.core.Layout;
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.Logger;
 import org.apache.logging.log4j.core.appender.AbstractAppender;
 import org.apache.logging.log4j.core.layout.PatternLayout;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -36,11 +38,22 @@ class Log4j2Collector implements CollectorImpl {
     @Override
     public List<String> getResult() {
         // TODO Check whether a more appropriate layout can be found, e.g. without \n at the end.
-        return appender.events.stream().map(String::trim).collect(toList());
+        Layout<?> layout = appender.getLayout();
+
+        return appender.events.stream()
+                .map(layout::toByteArray)
+                .map(String::new)
+                .map(String::trim)
+                .collect(toList());
+    }
+
+    @Override
+    public List<?> getRawLogs() {
+        return appender.events.stream().collect(toList());
     }
 
     class ListAppender extends AbstractAppender {
-        List<String> events = new ArrayList<>();
+        List<LogEvent> events = new ArrayList<>();
 
 
         ListAppender(String name) {
@@ -49,7 +62,7 @@ class Log4j2Collector implements CollectorImpl {
 
         @Override
         public void append(LogEvent event) {
-            events.add(new String(getLayout().toByteArray(event)));
+            events.add(event.toImmutable());
         }
     }
 }
