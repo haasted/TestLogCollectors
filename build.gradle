@@ -14,7 +14,7 @@ apply plugin: 'signing'
 
 jar {
     baseName = 'LogCollector'
-    version = '0.6.1'
+    version = '0.7.0-SNAPSHOT'
 }
 
 repositories {
@@ -83,7 +83,7 @@ check.dependsOn(sourcesJar, javadocJar, signing)
 
 group = "dk.bitcraft"
 archivesBaseName = "LogCollector"
-version = "0.6.1"
+version = "0.7.0-SNAPSHOT"
 
 
 uploadArchives {
