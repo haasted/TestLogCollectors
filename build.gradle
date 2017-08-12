@@ -21,6 +21,17 @@ repositories {
     jcenter()
 }
 
+ext {
+    // Build server does not have access to signing credentials.
+    if (!project.hasProperty('ossrhUsername')) {
+        ossrhUsername = '-'
+    }
+
+    if (!project.hasProperty('ossrhPassword')) {
+        ossrhPassword = '-'
+    }
+}
+
 // In this section you declare the dependencies for your production and test code
 dependencies {
     compile 'junit:junit:4.12'
@@ -78,7 +89,11 @@ signing {
     sign configurations.archives
 }
 
-check.dependsOn(sourcesJar, javadocJar, signing)
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.1'
+}
+
+check.dependsOn(sourcesJar, javadocJar)
 
 
 group = "dk.bitcraft"
