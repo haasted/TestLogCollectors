@@ -1,5 +1,10 @@
 # Log Collectors
 
+[![Build Status](https://travis-ci.org/haasted/TestLogCollectors.svg?branch=master)](https://travis-ci.org/haasted/TestLogCollectors)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/dk.bitcraft/LogCollector/badge.svg)](https://maven-badges.herokuapp.com/maven-central/dk.bitcraft/LogCollector)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/haasted/TestLogCollectors/blob/master/LICENSE)
+[![Javadoc](https://img.shields.io/badge/javadoc-OK-blue.svg)](https://javadoc.io/doc/dk.bitcraft/LogCollector/)
+
 Application logging is important and occasionally important enough to make it worth creating automated tests to verify it. Enter Log Collectors, which captures log records for inspection or verification during testing. 
 
 The framework is a [JUnit Rule](https://github.com/junit-team/junit4/wiki/Rules), which hooks into any logger it is provided, and intercepts its messages.
