@@ -3,7 +3,7 @@ package test;
 import org.junit.Rule;
 import org.junit.Test;
 
-import dk.bitcraft.lc.LogCollector;
+import dk.bitcraft.lc.JUnit4LogCollector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,7 +13,7 @@ public class RuleTest {
     private final static Logger logger = LoggerFactory.getLogger(RuleTest.class);
 
     @Rule
-    public LogCollector logCollector = new LogCollector(logger);
+    public JUnit4LogCollector logCollector = new JUnit4LogCollector(logger);
 
 
     @Test

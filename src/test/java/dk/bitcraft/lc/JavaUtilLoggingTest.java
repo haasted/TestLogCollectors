@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 
 public class JavaUtilLoggingTest {
     @Rule
-    public LogCollector collector = new LogCollector(Logger.getLogger("test.logger"));
+    public JUnit4LogCollector collector = new JUnit4LogCollector(Logger.getLogger("test.logger"));
 
     @Test
     public void test() {

@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.util.logging.Logger;
 
-import dk.bitcraft.lc.LogCollector;
+import dk.bitcraft.lc.JUnit4LogCollector;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,7 +15,7 @@ public class RuleTest {
     private static final Logger logger = Logger.getLogger("test.logger");
 
     @Rule
-    public LogCollector logCollector = new LogCollector(logger);
+    public JUnit4LogCollector logCollector = new JUnit4LogCollector(logger);
 
     @Test
     public void test() {
