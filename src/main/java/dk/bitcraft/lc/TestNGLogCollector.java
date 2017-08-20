@@ -6,27 +6,27 @@ import org.testng.ITestResult;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class TestNGLogCollector implements ITestListener {
 
     private static CollectorImpl collector;
 
+    private static Object logger;
+
     public static void load(Object logger) {
+        TestNGLogCollector.logger = Objects.requireNonNull(logger);
         // TODO Collect this inside Frameworks class
+    }
+
+    protected void before() {
         collector = Arrays.stream(Frameworks.values())
                 .map(v -> v.getCollector(logger))
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Unknown logger " + logger.getClass()));
-        System.out.println("Collector set : " + collector);
-    }
-
-    protected void before() {
-        if (collector == null) {
-            throw new IllegalStateException("TestNGLogCollector has not been properly initialized. Did you remember to call load()?");
-        }
 
         collector.setup();
     }

@@ -3,7 +3,7 @@ package dk.bitcraft.lc.testng;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class BasicTest {
     private final static Logger log = LoggerFactory.getLogger(BasicTest.class);
 
-    @BeforeMethod
+    @BeforeTest
     public void captureLogger() {
         TestNGLogCollector.load(log);
     }
