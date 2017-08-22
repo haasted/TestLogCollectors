@@ -1,0 +1,10 @@
+test {
+    useTestNG()
+}
+
+dependencies {
+    compile 'ch.qos.logback:logback-core:1.2.3'
+    compile 'ch.qos.logback:logback-classic:1.2.3'
+
+    testCompile 'org.testng:testng:6.10'
+}

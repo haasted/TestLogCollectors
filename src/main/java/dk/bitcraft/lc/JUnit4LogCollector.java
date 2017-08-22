@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 
-public class LogCollector extends ExternalResource {
+public class JUnit4LogCollector extends ExternalResource {
     private CollectorImpl collector;
 
-    public LogCollector(Object logger) {
+    public JUnit4LogCollector(Object logger) {
         collector = Arrays.stream(Frameworks.values())
                 .map(v -> v.getCollector(logger))
                 .filter(Optional::isPresent)

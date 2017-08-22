@@ -18,7 +18,7 @@ public class RuleCleanupTest {
 
         Logger logger = LoggerFactory.getLogger(RuleCleanupTest.class);
 
-        LogCollector collector = new LogCollector(logger);
+        JUnit4LogCollector collector = new JUnit4LogCollector(logger);
         collector.before();
 
         logger.error("This is an error.");

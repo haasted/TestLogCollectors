@@ -14,7 +14,7 @@ apply plugin: 'signing'
 
 jar {
     baseName = 'LogCollector'
-    version = '0.7.0'
+    version = '0.8.0'
 }
 
 repositories {
@@ -34,7 +34,8 @@ ext {
 
 // In this section you declare the dependencies for your production and test code
 dependencies {
-    compile 'junit:junit:4.12'
+    compileOnly 'junit:junit:4.12'
+    compileOnly 'org.testng:testng:6.10'
 
     compileOnly 'org.slf4j:slf4j-api:1.7.24'
     compileOnly 'org.slf4j:slf4j-jdk14:1.7.24'
@@ -45,6 +46,8 @@ dependencies {
     compileOnly 'org.apache.logging.log4j:log4j-core:2.8.2'
     compileOnly 'org.apache.logging.log4j:log4j-slf4j-impl:2.8.2'
 
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.testng:testng:6.10'
     testCompile 'org.assertj:assertj-core:3.8.0'
 
     testCompile 'org.slf4j:slf4j-api:1.7.24'
@@ -99,7 +102,7 @@ check.dependsOn(sourcesJar, javadocJar)
 
 group = "dk.bitcraft"
 archivesBaseName = "LogCollector"
-version = "0.7.0"
+version = "0.8.0"
 
 
 uploadArchives {
@@ -123,8 +126,6 @@ uploadArchives {
                 url 'https://github.com/haasted/TestLogCollectors'
 
                 scm {
-                    connection 'scm:svn:http://foo.googlecode.com/svn/trunk/'
-                    developerConnection 'scm:svn:https://foo.googlecode.com/svn/trunk/'
                     url 'https://github.com/haasted/TestLogCollectors'
                 }
 

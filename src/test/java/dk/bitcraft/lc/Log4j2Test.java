@@ -14,7 +14,7 @@ import static org.junit.Assert.assertTrue;
 
 public class Log4j2Test {
     @Rule
-    public LogCollector collector = new LogCollector(LogManager.getLogger("test.logger"));
+    public JUnit4LogCollector collector = new JUnit4LogCollector(LogManager.getLogger("test.logger"));
 
     @Test
     public void test() {
