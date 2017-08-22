@@ -15,7 +15,7 @@ import static org.junit.Assert.assertTrue;
 
 public class LogbackTest {
     @Rule
-    public LogCollector collector = new LogCollector(LoggerFactory.getLogger("test.logger"));
+    public JUnit4LogCollector collector = new JUnit4LogCollector(LoggerFactory.getLogger("test.logger"));
 
     @Test
     public void test() {

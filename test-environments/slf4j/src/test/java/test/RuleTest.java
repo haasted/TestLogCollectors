@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import dk.bitcraft.lc.LogCollector;
+import dk.bitcraft.lc.JUnit4LogCollector;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,7 +13,7 @@ public class RuleTest {
     final static Logger logger = LoggerFactory.getLogger(RuleTest.class);
 
     @Rule
-    public LogCollector collector = new LogCollector(logger);
+    public JUnit4LogCollector collector = new JUnit4LogCollector(logger);
 
 
     @Test
