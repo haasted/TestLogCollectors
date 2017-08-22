@@ -18,7 +18,7 @@ public class BasicTest {
 
     @BeforeTest
     public void captureLogger() {
-        TestNGLogCollector.load(log);
+        TestNGLogCollector.setLogSource(log);
     }
 
     public void isThisNowAtest() {

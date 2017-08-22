@@ -24,7 +24,7 @@ public class PercentageTest {
 
     @BeforeMethod
     public void captureLogger() {
-        TestNGLogCollector.load(log);
+        TestNGLogCollector.setLogSource(log);
     }
 
     // Verify that clean up also works with a test that is allowed to occasionally fail

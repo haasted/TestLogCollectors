@@ -15,9 +15,8 @@ public class TestNGLogCollector implements ITestListener {
 
     private static Object logger;
 
-    public static void load(Object logger) {
+    public static void setLogSource(Object logger) {
         TestNGLogCollector.logger = Objects.requireNonNull(logger);
-        // TODO Collect this inside Frameworks class
     }
 
     protected void before() {
