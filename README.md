@@ -56,7 +56,7 @@ public void testGizmo() {
 @Listeners(TestNGLogCollector.class)
 public class GizmoTest {
 
-    final static Logger logger = LoggerFactory.getLogger(SLF4JTest.class);
+    final static Logger logger = LoggerFactory.getLogger("acme.Gizmo");
 
     @BeforeTest
     public void captureLogger() {
