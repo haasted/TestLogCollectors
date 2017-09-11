@@ -104,19 +104,18 @@ Maven installation
 <dependency>
     <groupId>dk.bitcraft</groupId>
     <artifactId>LogCollector</artifactId>
-    <version>0.8.0</version>
+    <version>0.9.0</version>
     <scope>test</scope>
 </dependency>
 ```
 
 Gradle installation
 ```
-testCompile 'dk.bitcraft:LogCollector:0.8.0'
+testCompile 'dk.bitcraft:LogCollector:0.9.0'
 ```
 
 # Future work
 
-  - Support for JUnit 5.
   - Come up with a better name for the framework.
   - Improve Javadoc and documentation.
   - Discover the intricacies of the various logging frameworks in real-world settings and adapt to them.
