@@ -54,7 +54,7 @@ public void testGizmo() {
 ### JUnit 5
 ```java
 @LogCollectorExtension
-public class BasicTest {
+public class GizmoTest {
     Logger logger = LogManager.getLogger("acme.Gizmo");
 
     JUnit5LogCollector collector = new JUnit5LogCollector(logger);
