@@ -2,9 +2,9 @@ package dk.bitcraft.lc;
 
 import org.junit.jupiter.api.extension.AfterTestExecutionCallback;
 import org.junit.jupiter.api.extension.BeforeTestExecutionCallback;
+import org.junit.jupiter.api.extension.ExtensionConfigurationException;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestInstancePostProcessor;
-import org.junit.platform.commons.support.AnnotationSupport;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ class JUnit5LogCollectorExtension
             try {
                 collectors.add((JUnit5LogCollector) field.get(testinstance));
             } catch (IllegalAccessException e) {
-                e.printStackTrace(); // TODO Throw an initialization error with a meaningful message.
+                throw new ExtensionConfigurationException("Cannot access JUnit5LogCollector field " + field.getName() + " in " + field.getDeclaringClass());
             }
         }
 

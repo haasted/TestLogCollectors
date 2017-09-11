@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class BasicTest {
     public JUnit5LogCollector logCollector1 = new JUnit5LogCollector(LoggerFactory.getLogger("acme.gizmo"));
 
-    public JUnit5LogCollector logCollector2 = new JUnit5LogCollector(LoggerFactory.getLogger("dingenot"));
+    private JUnit5LogCollector logCollector2 = new JUnit5LogCollector(LoggerFactory.getLogger("dingenot"));
 
     @Test
     void test1() {
