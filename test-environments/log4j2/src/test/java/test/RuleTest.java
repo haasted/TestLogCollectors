@@ -27,4 +27,16 @@ public class RuleTest {
                 .contains("This is an error!", "This is another error!");
     }
 
+
+    @Test
+    public void verifyAdditivity() {
+        {
+            Logger logger = LogManager.getLogger("test.logger.subLogger");
+            logger.error("This should be available in the collector");
+        }
+
+        assertThat(collector.getLogs())
+                .hasSize(1)
+                .contains("This should be available in the collector");
+    }
 }

@@ -25,5 +25,14 @@ public class RuleTest {
         assertThat(logCollector.getLogs()).hasSize(2);
     }
 
+    @Test
+    public void verifyAdditivity() {
+        {
+            Logger logger = Logger.getLogger("test.logger.subLogger");
+            logger.warning("This should be available in the collector");
+        }
+
+        assertThat(logCollector.getLogs()).hasSize(1);
+    }
 }
 
