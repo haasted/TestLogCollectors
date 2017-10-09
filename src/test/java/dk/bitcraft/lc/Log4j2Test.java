@@ -25,8 +25,10 @@ public class Log4j2Test {
             logger.error("This is a third error!");
         }
 
-        assertThat(collector.getLogs()).hasSize(3)
-                .contains("This is an error!", "This is another error!", "This is a third error!");
+        assertThat(collector.getLogs()).hasSize(3);
+        assertThat(collector.getLogs().get(0)).contains("This is an error!");
+        assertThat(collector.getLogs().get(1)).contains("This is another error!");
+        assertThat(collector.getLogs().get(2)).contains("This is a third error!");
 
         List<LogEvent> rawLogs = (List<LogEvent>) collector.getRawLogs();
         assertThat(rawLogs).hasSize(3);
