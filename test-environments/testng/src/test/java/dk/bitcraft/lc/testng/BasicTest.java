@@ -24,7 +24,8 @@ public class BasicTest {
     public void isThisNowAtest() {
         log.info("This is an info statement");
 
-        assertThat(TestNGLogCollector.getLogs()).hasSize(1).containsSubsequence("This is an info statement");
+        assertThat(TestNGLogCollector.getLogs()).hasSize(1);
+        assertThat(TestNGLogCollector.getLogs().get(0)).contains("This is an info statement");
     }
 
     public void canIreturnStuff() {
