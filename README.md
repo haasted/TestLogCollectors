@@ -71,6 +71,14 @@ public class GizmoTest {
 
 ```
 
+#### Note for Kotlin/JUnit 5 Users
+To allow the extension to pick-up your Collector, the property must be annotated so reflection works correctly:
+```kotlin
+    @JvmField
+    val collector = JUnit5LogCollector(logger)
+```
+See: https://kotlinlang.org/docs/reference/java-to-kotlin-interop.html#instance-fields
+
 ### TestNG
 ```java
 @Test
