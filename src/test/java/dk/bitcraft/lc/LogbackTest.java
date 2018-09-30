@@ -15,7 +15,7 @@ import static org.junit.Assert.assertTrue;
 
 public class LogbackTest {
     @Rule
-    public JUnit4LogCollector collector = new JUnit4LogCollector(LoggerFactory.getLogger("test.logger"));
+    public JUnit4LogCollector<LoggingEvent> collector = new JUnit4LogCollector<>(LoggerFactory.getLogger("test.logger"));
 
     @Test
     public void test() {
@@ -32,7 +32,7 @@ public class LogbackTest {
         assertThat(collector.getLogs()).hasSize(1);
         assertThat(collector.getLogs().get(0)).contains("This should be collected!");
 
-        List<LoggingEvent> rawLogs = (List<LoggingEvent>) collector.getRawLogs();
+        List<LoggingEvent> rawLogs = collector.getRawLogs();
         assertTrue(rawLogs.stream().allMatch(e -> e.getLevel() == Level.WARN));
     }
 }

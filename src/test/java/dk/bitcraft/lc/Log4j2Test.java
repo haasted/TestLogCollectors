@@ -14,7 +14,7 @@ import static org.junit.Assert.assertTrue;
 
 public class Log4j2Test {
     @Rule
-    public JUnit4LogCollector collector = new JUnit4LogCollector(LogManager.getLogger("test.logger"));
+    public JUnit4LogCollector<LogEvent> collector = new JUnit4LogCollector<>(LogManager.getLogger("test.logger"));
 
     @Test
     public void test() {
@@ -28,7 +28,7 @@ public class Log4j2Test {
         assertThat(collector.getLogs()).hasSize(3)
                 .contains("This is an error!", "This is another error!", "This is a third error!");
 
-        List<LogEvent> rawLogs = (List<LogEvent>) collector.getRawLogs();
+        List<LogEvent> rawLogs = collector.getRawLogs();
         assertThat(rawLogs).hasSize(3);
 
         assertTrue(rawLogs.stream().allMatch(l -> l.getLevel() == Level.ERROR));

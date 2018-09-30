@@ -39,14 +39,14 @@ The following examples show how to add the framework to a test, provide it with 
 Logger logger = LogManager.getLogger("acme.Gizmo");
 
 @Rule
-public JUnit4LogCollector collector = new JUnit4LogCollector(logger);
+public JUnit4LogCollector<LogEvent> collector = new JUnit4LogCollector<>(logger);
 
 @Test
 public void testGizmo() {
     Gizmo gizmo = new Gizmo();
     gizmo.run();
 
-    List<LogEvent> rawLogs = (List<LogEvent>) collector.getRawLogs();
+    List<LogEvent> rawLogs = collector.getRawLogs();
     assertTrue(rawLogs.stream().noneMatch(l -> l.getLevel() == Level.ERROR));
 }
 ```
@@ -57,14 +57,14 @@ public void testGizmo() {
 public class GizmoTest {
     Logger logger = LogManager.getLogger("acme.Gizmo");
 
-    JUnit5LogCollector collector = new JUnit5LogCollector(logger);
+    JUnit5LogCollector<LogEvent> collector = new JUnit5LogCollector<>(logger);
 
     @Test
     void testGizmo() {
         Gizmo gizmo = new Gizmo();
         gizmo.run();
 
-        List<LogEvent> rawLogs = (List<LogEvent>) collector.getRawLogs();
+        List<LogEvent> rawLogs = collector.getRawLogs();
         assertTrue(rawLogs.stream().noneMatch(l -> l.getLevel() == Level.ERROR));
     }
 }
@@ -96,7 +96,7 @@ public class GizmoTest {
         Gizmo gizmo = new Gizmo();
         gizmo.run();
 
-        List<LogEvent> rawLogs = (List<LogEvent>) TestNGLogCollector.getRawLogs();
+        List<LogEvent> rawLogs = TestNGLogCollector.getRawLogs(LoggingEvent.class);
         assertTrue(rawLogs.stream().noneMatch(l -> l.getLevel() == Level.ERROR));
     }
 }
@@ -127,6 +127,5 @@ testCompile 'dk.bitcraft:LogCollector:0.9.0'
   - Come up with a better name for the framework.
   - Improve Javadoc and documentation.
   - Discover the intricacies of the various logging frameworks in real-world settings and adapt to them.
-  - Avoid the ugly cast in `getRawLogs`.
   - Detect SLF4j's `NOPLogger` and replace it with `SimpleLogger`
   - Any ideas? Get in touch!

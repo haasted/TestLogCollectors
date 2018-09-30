@@ -13,7 +13,7 @@ import java.util.UUID;
 
 import static java.util.stream.Collectors.toList;
 
-class Log4j2Collector implements CollectorImpl {
+class Log4j2Collector implements CollectorImpl<LogEvent> {
     private final Logger logger;
     ListAppender appender;
 
@@ -48,7 +48,7 @@ class Log4j2Collector implements CollectorImpl {
     }
 
     @Override
-    public List<?> getRawLogs() {
+    public List<LogEvent> getRawLogs() {
         return appender.events.stream().collect(toList());
     }
 

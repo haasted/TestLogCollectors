@@ -2,7 +2,6 @@ package dk.bitcraft.lc;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.spi.ILoggingEvent;
@@ -10,7 +9,7 @@ import ch.qos.logback.core.read.ListAppender;
 
 import static java.util.stream.Collectors.toList;
 
-class LogBackCollector implements CollectorImpl {
+class LogBackCollector implements CollectorImpl<ILoggingEvent> {
     private final Logger logger;
 
     private final static String appenderName = UUID.randomUUID().toString();
@@ -41,7 +40,7 @@ class LogBackCollector implements CollectorImpl {
     }
 
     @Override
-    public List<?> getRawLogs() {
+    public List<ILoggingEvent> getRawLogs() {
         return appender.list.stream().collect(toList());
     }
 }

@@ -41,7 +41,7 @@ public class TestNGLogCollector implements ITestListener {
         return collector.getResult();
     }
 
-    public static List<?> getRawLogs() {
+    public static <LOG> List<LOG> getRawLogs(Class<LOG> clazz) {
         return collector.getRawLogs();
     }
 

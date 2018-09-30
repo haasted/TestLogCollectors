@@ -7,9 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 
-public class JUnit4LogCollector extends ExternalResource {
-    private CollectorImpl collector;
+public class JUnit4LogCollector<LOG> extends ExternalResource {
+    private CollectorImpl<LOG> collector;
 
+    @SuppressWarnings("unchecked")
     public JUnit4LogCollector(Object logger) {
         collector = Arrays.stream(Frameworks.values())
                 .map(v -> v.getCollector(logger))
@@ -33,7 +34,7 @@ public class JUnit4LogCollector extends ExternalResource {
         return collector.getResult();
     }
 
-    public List<?> getRawLogs() {
+    public List<LOG> getRawLogs() {
         return collector.getRawLogs();
     }
 }

@@ -12,7 +12,7 @@ import static java.util.stream.Collectors.toList;
  * <p>SLF4J's SimpleLogger works by printing directly to System.err, so this collector assumes control of System.err and captures its output.</p>
  * <p>Any other usage of <code>System.err</code> will be included among the captured log statements.</p>
  */
-public class SLF4JSimpleCollector implements CollectorImpl {
+public class SLF4JSimpleCollector implements CollectorImpl<String> {
 
     private PrintStream systemErr;
     private CapturingPrintStream capturingPrintStream;
@@ -38,7 +38,7 @@ public class SLF4JSimpleCollector implements CollectorImpl {
     }
 
     @Override
-    public List<?> getRawLogs() {
+    public List<String> getRawLogs() {
         return getResult();
     }
 

@@ -32,7 +32,7 @@ public class PercentageTest {
         log.warn("This is a warning.");
         log.info("This is purely informational.");
 
-        List<LoggingEvent> logs = (List<LoggingEvent>) TestNGLogCollector.getRawLogs();
+        List<LoggingEvent> logs = TestNGLogCollector.getRawLogs(LoggingEvent.class);
 
         assertThat(logs)
                 .hasSize(2)
