@@ -4,9 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class JUnit5LogCollector {
-    private CollectorImpl collector;
+public class JUnit5LogCollector<LOG> {
+    private CollectorImpl<LOG> collector;
 
+    @SuppressWarnings("unchecked")
     public JUnit5LogCollector(Object logger) {
         collector = Arrays.stream(Frameworks.values())
                 .map(v -> v.getCollector(logger))
@@ -28,7 +29,7 @@ public class JUnit5LogCollector {
         return collector.getResult();
     }
 
-    public List<?> getRawLogs() {
+    public List<LOG> getRawLogs() {
         return collector.getRawLogs();
     }
 }

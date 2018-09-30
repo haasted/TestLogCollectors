@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 
 public class JavaUtilLoggingTest {
     @Rule
-    public JUnit4LogCollector collector = new JUnit4LogCollector(Logger.getLogger("test.logger"));
+    public JUnit4LogCollector<LogRecord> collector = new JUnit4LogCollector<>(Logger.getLogger("test.logger"));
 
     @Test
     public void test() {
@@ -29,7 +29,7 @@ public class JavaUtilLoggingTest {
         assertThat(logs.get(0)).contains("This is an warning!");
         assertThat(logs.get(1)).contains("This is another warning!");
 
-        List<LogRecord> rawLogs = (List<LogRecord>) collector.getRawLogs();
+        List<LogRecord> rawLogs = collector.getRawLogs();
         assertTrue(rawLogs.stream().allMatch(e -> e.getLevel() == Level.WARNING));
     }
 }

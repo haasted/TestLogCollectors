@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
-public class JavaUtilLoggingCollector implements CollectorImpl {
+public class JavaUtilLoggingCollector implements CollectorImpl<LogRecord> {
 
     private final Logger logger;
     private ListHandler handler;
@@ -39,7 +39,7 @@ public class JavaUtilLoggingCollector implements CollectorImpl {
     }
 
     @Override
-    public List<?> getRawLogs() {
+    public List<LogRecord> getRawLogs() {
         return handler.records.stream().collect(toList());
     }
 

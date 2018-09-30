@@ -13,7 +13,7 @@ public class RuleTest {
     final static Logger logger = LoggerFactory.getLogger(RuleTest.class);
 
     @Rule
-    public JUnit4LogCollector collector = new JUnit4LogCollector(logger);
+    public JUnit4LogCollector<String> collector = new JUnit4LogCollector<>(logger);
 
 
     @Test
